@@ -13,15 +13,22 @@ int main(void)
 {
 	int i;
 	SystemInit();
-	/* Replace with your application code */
-	REG_PORT_DIR1 |= 1 << 8;
+	
+	//configure porta21 as output
+	REG_PORT_DIR0 |= 1 << 21;
 	
 	while (1)
 	{
-		REG_PORT_OUT1 |= 1 << 8;
-		for(i = 0; i < 100000; i++){}
+		//output high on porta21
+		REG_PORT_OUT0 |= 1 << 21;
 		
-		REG_PORT_OUT1 &= (~(1 << 8));
+		//wait
+		for(i = 0; i < 100000; i++){}
+			
+		//output low on porta21
+		REG_PORT_OUT0 &= (~(1 << 21));
+		
+		//wait
 		for(i = 0; i < 100000; i++){}
 	}
 }
